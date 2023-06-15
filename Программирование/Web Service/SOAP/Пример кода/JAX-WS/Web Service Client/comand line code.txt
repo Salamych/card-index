@@ -1,0 +1,6 @@
+(wsimport -keep -verbose http://localhost:8080/JAXWSRICalService/CalServiceImpl?wsdl)
+
+E:\Global_project\WebServices\weekend_batch_31may_2023\netbeans_workspace\JAXWSRICalServiceClient\src>
+wsimport -keep -s java http://localhost:8080/JAXWSRICalService/CalServiceImpl?wsdl
+
+wsimport - доступен до версии JDK 11. Начиная с версии JDK 11 он отсутсвует.

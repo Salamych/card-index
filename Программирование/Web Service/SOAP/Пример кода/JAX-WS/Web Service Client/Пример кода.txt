@@ -1,0 +1,23 @@
+
+package test;
+
+import com.durgasoft.CalServiceI;
+import java.net.URL;
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
+
+
+public class TestClient {
+    public static void main(String[] args) throws Exception{
+
+        URL url = new URL("http://localhost:8080/JAXWSRICalService/CalServiceImpl?wsdl");
+        QName q = new QName("http://www.durgasoft.com", "CalServiceImpl");
+        Service s = Service.create(url,q);
+        
+        CalServiceI ser = s.getPort(com.durgasoft.CalServiceI.class);
+        
+        int res = ser.add(10, 10);
+        System.out.println("Result = "+res);
+    }
+ 
+}
