@@ -1,0 +1,20 @@
+-->Увеличение длины массива:
+System.arraycopy(src, srcPos, dest, destPos, length);
+src — старый массив;
+srcPos — позиция в старом массиве, с которой начинают чтение;
+dest — новый массив;
+destPos — позиция в новом массиве, с которой начинают запись;
+length — количество элементов, которые надо прочитать из старого массива.
+
+Пример кода:
+double[] values = new double[2];
+values[0] = 1.0;
+values[1] = 1.5;
+ 
+double[] tmpValues = new double[3];
+System.arraycopy(values, 0, tmpValues, 0, values.length);
+values = tmpValues;
+
+-->Длина массива:
+arr.length;
+

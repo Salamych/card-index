@@ -1,0 +1,10 @@
+const val MAX_EXPERIENCE:Int = 5000  //Объявление константы
+fun main(args: Array<String>){
+    var experiencePoint:Int = 5        //объявление простой переменной
+    val playerName:String = "Extragon"  // объявление неизменяемой переменной
+    experiencePoint +=5
+    println(playerName+" - "+experiencePoint)
+    println("Max Experience - "+MAX_EXPERIENCE)
+}
+
+В отличии от Java, Kotlin предоставляет только один вид типов: ссылочные типы - var experiencePoint:Int = 5

@@ -1,0 +1,11 @@
+fun main(args: Array<String>){
+println("Hello World")
+}
+
+Расширение для файлов Kotlin - .kt
+
+Быстрая проверка кода без компиляции - TOOLS->Kotlin->Kotlin REPL("read, evaluate, print, loop" - "прочитать, выполнить, вывести, повторить") 
+
+Вызов меню поиска везде(Show everywhere) - Shift два раза
+
+казать байт-код Котлина - TOOLS->Kotlin->Show Kotlin ByteCode 

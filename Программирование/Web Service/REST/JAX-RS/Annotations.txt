@@ -1,0 +1,74 @@
+@Path("/messages")                                                 //URL путь к классу с методами
+public class MessageResource 
+{
+
+    @GET                                                           // Метод HTTP
+    @Produces(MediaType.APPLICATION_XML)                           //Способ записи файла(XML, Text, JSON ...)(Создает сообщение)
+    public List<Message> getMessages(){}
+
+    @GET
+    @Path("/{messageId}")                                          // Путь к конкретному методу
+    @Produces(MediaType.TEXT_PLAIN)
+    public Message getMessage(@PathParam("messageId")              // Путь параметра ввода     
+                        long id){}
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)                          // Способ отображения файла (Использует соответсвующий файл определенного формата)  
+    @Produces(MediaType.APPLICATION_JSON)
+    public Message addMessage(Message message){}
+
+}
+
+Можно вынести аннотации @Consumes(MediaType.APPLICATION_JSON) @Produces(MediaType.APPLICATION_JSON) в область
+класса и сократить код:
+
+@Path("/messages")                                                 
+@Consumes(MediaType.APPLICATION_JSON) 
+@Produces(MediaType.APPLICATION_JSON)
+public class MessageResource 
+{
+    @GET                                                          
+    public List<Message> getMessages(@QueryParam("year"){}         // Параметризированный запрос: http://localhost:8080/messenger2/webapi/messages?year=2023
+
+
+}
+
+@Path("/injectdemo")
+@Consumes(MediaType.TEXT_PLAIN)
+@Produces(MediaType.TEXT_PLAIN)
+public class InjectDemoResource {
+    @GET
+    @Path("annotations")
+    public String getParamsUsingAnnotations(@MatrixParam("param")String matrixParam,          //Параметры матрицы — это набор параметров запроса, 
+                                                                                              разделенных точкой с запятой, а не амперсандом. Это 
+                                                                                              может произойти из-за того, что значения были выбраны 
+                                                                                              из поля ввода множественного выбора и задаются с помощью 
+                                                                                              запроса GET, а не запроса POST. http://localhost:8080/messenger2/webapi/injectdemo/annotations;param=value
+                                            @HeaderParam("customHeaderParam")String header){  //Аннотация @HeaderParam используется для вставки значений заголовка HTTP-запроса в параметры метода ресурса.
+
+return "Matrix param : "+matrixParam;
+    }
+
+    @GET
+    @Path("context")
+    public String getParamsUsingContext(@Context UriInfo uriInfo, @Context HttpHeaders headers){
+        String path = uriInfo.getAbsolutePath().toString();
+        String cookies = headers.getCookies().toString();
+    return "Path : "+path + " Cookies: "+cookies;
+    }
+}
+
+Аннотация @CookieParam позволяет вам @CookieParam файлы cookie метода вашего ресурса, отправленные клиентом. 
+Представьте, что вы отправили куки-файл cartId клиентам, чтобы вы могли отслеживать корзину покупателя. Чтобы 
+извлечь cookie из HTTP-запроса, просто аннотируйте параметр метода, которому вы хотите назначить данные cookie.
+
+
+
+public class MessageFilterBean {
+    private @QueryParam("year") int year;
+    private @QueryParam("start") int start;
+    private @QueryParam("size") int size;
+getters and setters}
+
+    @GET
+    public List<Message> getMessages(@BeanParam MessageFilterBean filterBean) {}
