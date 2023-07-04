@@ -1,0 +1,4 @@
+public inline fun TODO(): Nothing = throw NotImplementedError()
+
+TODO возбуждает исключение - иначе говоря, функция гарантированно 
+завершится ошибкой - она возвращает тип Nothing (По моему мнению похож на return null;).

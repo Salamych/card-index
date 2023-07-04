@@ -1,0 +1,28 @@
+
+Автоматическое определение типа работает, даже когда анонимная функцияпринимает один или более
+аргументов, но чтобы помочь компилятору определить тип переменной, следует указать имя и тип 
+каждого параметра в объявлении анонимной функции.
+
+До:
+val greetingFunction: (String, Int) -> String = {playerName, numBuildings ->
+        val currentYear = 2023
+        println("Adding $numBuildings houses")
+        "Welcome to SimVillage, $playerName! (copyright $currentYear)"
+
+    }
+    println(greetingFunction("Guayl",2)) //Adding 2 houses
+                                         //Welcome to SimVillage, Guayl! (copyright 2023)
+
+
+После:
+val greetingFunction = {playerName: String, numBuildings: Int ->
+        val currentYear = 2023
+        println("Adding $numBuildings houses")
+        "Welcome to SimVillage, $playerName! (copyright $currentYear)"
+    }
+    println(greetingFunction("Guayl",2)) //Adding 2 houses
+                                         //Welcome to SimVillage, Guayl! (copyright 2023)
+
+В сочетании с неявным возвратом автоматическое определение типа функции может сделать сложной для 
+понимания. Но если анонимная функция простая и ясная, автоматическое определение типов помогает
+сделать код более лаконичным.

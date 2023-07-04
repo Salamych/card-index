@@ -1,0 +1,9 @@
+--->inline (встраивание) - избавляет JVM от необходимости использовать экземпляр объекта
+и выделять память для переменных в лямбде.
+
+Чтобы встроить дямбду, отметьте функцию, принимающую лямбду, ключевым словом inline.
+
+inline fun runSimulation(playerName: String, greetingFunction: (String, Int) -> String) {
+    val numBuildings = (1..3).shuffled().last() // Случайно выберет 1, 2 или 3
+    println(greetingFunction(playerName, numBuildings))
+}

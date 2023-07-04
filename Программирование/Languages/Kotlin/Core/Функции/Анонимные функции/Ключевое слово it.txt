@@ -1,0 +1,9 @@
+В анонимной функции, которая принимает ровно один аргумент, вместо определения имени параметра можно использовать
+удобную альтернативу - ключевое слово it. В анонимных функциях с одним параметром можно использовать и именнованный 
+параметр, и его замену - ключевое слово it.
+
+val greetingFunction: (String) -> String = {
+        val currentYear = 2023
+        "Welcome to SimVillage, $it! (copyright $currentYear)"
+    }
+    println(greetingFunction("Guayl")) //Welcome to SimVillage, Guayl! (copyright 2023)

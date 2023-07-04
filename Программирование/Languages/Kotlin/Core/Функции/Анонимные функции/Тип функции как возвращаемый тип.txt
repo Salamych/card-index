@@ -1,0 +1,38 @@
+Как и любой другой тип, функциональный тип также может быть возвращаемым типом. Это значит,
+что можно объявить функцию, которая возвращает функцию.
+
+Функция configureGreetingFunction настраивает аргументы для лямбды в переменной greetingFunction,
+а затемгенерирует и возвращает лямбду, готовую к использованию.
+
+fun main(args: Array<String>) {
+    runSimulation()
+
+}
+
+fun runSimulation(){
+    val greetingFunction = configureGreetingFunction()
+    println(greetingFunction("Guyal"))
+}
+
+
+fun configureGreetingFunction(): (String) -> String {
+    val structureType = "hospitals"
+    var numBuildings = 5
+    return {playerName: String ->
+        val currentYear = 2023
+        numBuildings +=1
+        println("Adding $numBuildings $structureType")
+        "Welcome to SimVillage, $playerName! (copyright $currentYear)"
+    }
+}
+
+configureGreetingFunction - это такая "фабрика функций", которая настраивает другую функцию. Она
+объявляет необходимые переменные и собирает их в лямбду, которая затем возвращает в точку вызова, 
+то есть в функцию runSimulation.
+
+numBuildings и structureType - локальные переменные, объявленные внутри configureGreetingFunction,
+и обе использутся в лямбде, возвращаемой из configureGreetingFunction, хотя объявляются во внешней 
+функции, которая возвращает лямбду. Это возможно, потому что лямбды в Kotlin - это замыкания. Они 
+замыкают переменные из внешней области видимости, в которой были определенны.
+
+Функция, которая принимает или возвращает другую функцию, также называется функцией высшего порядка.  

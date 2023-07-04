@@ -1,0 +1,6 @@
+Анонимные функции - функции без имени
+
+println({
+        val currentYear = 2023
+        "Welcome to SimVillage, Mayor! (copyright $currentYear)"
+    }()) // не забывать в концк ставить круглые скобки, инче не будет выполняться.

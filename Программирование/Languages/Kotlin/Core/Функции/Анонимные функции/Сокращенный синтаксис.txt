@@ -1,0 +1,15 @@
+Сокращенный синтаксис можно использовать, только когда лямбда передается
+в функцию как последний аргумент.
+
+fun main(args: Array<String>){
+    runSimulation("Guayl"){playerName: String, numBuildings: Int ->
+        val currentYear = 2023
+        println("Adding $numBuildings houses")
+        "Welcome to SimVillage, $playerName! (copyright $currentYear)"
+    }
+   
+}
+fun runSimulation(playerName: String, greetingFunction: (String, Int) -> String){
+    val numBuildings = (1..3).shuffled().last() // Случайно выберет 1, 2 или 3
+    println(greetingFunction(playerName,numBuildings))
+}

@@ -1,0 +1,13 @@
+private fun auraColor(isBlessed: Boolean, healthPoints: Int, isImmortal: Boolean): String {
+    val auraVisible = isBlessed && healthPoints > 50 || isImmortal
+    val auraColor = if (auraVisible) {
+        "GREEN"
+    } else {
+        "NONE"
+    }
+    return auraColor
+} - функция возвращает тип String
+
+В функциях, которые ничего не возвращают, в Котлине используют тип Unit вместо ключевого слова void(Java).
+Unit показывает функцию, которая ничего не возвращает, но может применяться к обобщеным (Generic) функциям, 
+для работы с которыми нужен хоть какойто тип.

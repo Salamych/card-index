@@ -1,0 +1,33 @@
+Оператор :: - используется для получения ссылки на функцию
+
+:: имя функции
+
+Получаем ссылку на функцию printConstructionCost и передаем ее как аргумент для нового параметра 
+costPrinter в runSimulation.
+
+fun main(args: Array<String>) {
+    runSimulation("Guayl", ::printConstructionCost) { playerName: String, numBuildings: Int ->
+        val currentYear = 2023
+        println("Adding $numBuildings houses")
+        "Welcome to SimVillage, $playerName! (copyright $currentYear)"
+    }
+
+}
+
+inline fun runSimulation(playerName: String,
+                         costPrinter: (Int) -> Unit,
+                         greetingFunction: (String, Int) -> String) {
+    val numBuildings = (1..3).shuffled().last() // Случайно выберет 1, 2 или 3
+    costPrinter(numBuildings)
+    println(greetingFunction(playerName, numBuildings))
+}
+
+fun printConstructionCost(numBuildings: Int){
+    val cost = 500
+    println("construction cost: ${cost * numBuildings}")
+}
+
+Ссылки на функцию полезны в ряде ситуаций. Если у вас есть именнованная функция, 
+которая соответсвует параметру с типом функции, то вместо объявления лямбды
+можно использовать ссылку на функцию. Или можно передавать в аргументе функцию из 
+стандартной библиотеки.
