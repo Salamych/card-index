@@ -1,0 +1,7 @@
+----------- I -> A ----------
+drink - drank - drunk - пить
+sit - sat - sat - сидеть
+sing - sang - sung - петь
+begin - began - begun - начинать
+ring - rang - rung - звонить
+swim - swam - swum - плавть, плыть

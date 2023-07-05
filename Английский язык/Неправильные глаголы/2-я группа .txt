@@ -1,0 +1,6 @@
+------------- D -> T ---------------
+send - sent - sent - посылать
+build - built - built - строить
+spend - spent - spent - тратить, расходовать
+lend - lent - lent - одалживать, давать в займы
+bend - bent - bent - сгибать, гнуть
