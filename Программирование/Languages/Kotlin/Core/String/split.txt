@@ -1,0 +1,43 @@
+const val TAVERN_NAME = "Taernyl's Folly"
+
+fun main(args: Array<String>) {
+    placeOrder("shandy,Dragon's Breath, 5.91")
+}
+private fun placeOrder(menuData: String){
+    val indexOfApostrophe = TAVERN_NAME.indexOf('\'')
+    val tavernMaster = TAVERN_NAME.substring(0 until indexOfApostrophe)
+    println("Madrigal speaks with $tavernMaster about their order.")
+
+    val data = menuData.split(',')
+    val type = data[0]
+    val name = data[1]
+    val price = data[2]
+    val message = "Madrigal buys a $name ($type) for $price"
+    println(message)
+}
+
+split - разбивает строку на подстроки по заданному разделителю.
+
+Так как split возвращает список, для нее поддерживается упрощенный синтаксис, 
+который называется деструктуризацией. Деструктуризация - это возможность объявить
+и инициализировать сразу несколько переменных
+
+const val TAVERN_NAME = "Taernyl's Folly"
+
+fun main(args: Array<String>) {
+    placeOrder("shandy,Dragon's Breath, 5.91")
+}
+private fun placeOrder(menuData: String){
+    val indexOfApostrophe = TAVERN_NAME.indexOf('\'')
+    val tavernMaster = TAVERN_NAME.substring(0 until indexOfApostrophe)
+    println("Madrigal speaks with $tavernMaster about their order.")
+
+    val (type,name,price) = menuData.split(',')
+       val message = "Madrigal buys a $name ($type) for $price"
+    println(message)
+}
+
+Деструктуризация часто помогает упростить присваивание значений сразу нескольким
+переменным. В любом случае, когда результат - это список, можно использовать синтаксис
+деструктуризации. Кроме списков (тип List), деструктурирующее присваивание поддерживается
+также для ассоциативных массивов (тип Map) и пар (тип Pair). 
