@@ -1,0 +1,1 @@
+assertNotEquals(expected, actual) - когда возвращаемое значение не равно ожидаемому = true

@@ -1,0 +1,2 @@
+val remainingBalance = totalPurse - price
+println("Remaining balance: ${"%.2f".format(remainingBalance)}")

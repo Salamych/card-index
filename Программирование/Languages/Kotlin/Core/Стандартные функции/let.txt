@@ -1,0 +1,13 @@
+let определяет переменную в область видимости заданной лямбды и позволяет использовать
+ключевое слово it.
+
+Без let:
+
+val firstElement = listOf(1,2,3).first() 
+val firstElementSquared = firstElement * firstElement
+
+С let:
+
+val firstElementSquared = listOf(1,2,3).first().let {
+	it * it
+}

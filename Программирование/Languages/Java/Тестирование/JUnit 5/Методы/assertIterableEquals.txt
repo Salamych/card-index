@@ -1,0 +1,1 @@
+assertIterableEquals(expectedArray, actualArray) - сравнивает возвращаемый перебранный массив с ожидаемым массивом

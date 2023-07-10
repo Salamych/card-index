@@ -1,0 +1,1 @@
+AssertArrayEquals(expectedArray, actualArray) - сравнивает возвращаемый массив с ожидаемым массивом

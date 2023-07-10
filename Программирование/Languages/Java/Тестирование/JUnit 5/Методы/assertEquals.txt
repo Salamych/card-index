@@ -1,0 +1,29 @@
+В методе помеченной аннотацией @Test создать экземпляр объекта.
+Вызвать метод который нужно протестировать.
+Вызвать метод assertEquals() в параметры которого указать ожидаемое
+значение и что получилось
+
+
+package io.javabrains;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class MathUtilsTest {
+    
+    public MathUtilsTest() {
+    }
+
+    @Test
+    public void test() {
+        MathUtils mathUtils = new MathUtils(); // Создаем экземпляр объекта
+
+        int expected = 2;                       // ожидаемое значение
+
+        int actual = mathUtils.add(1, 1);  // значение которое получилось
+        
+        assertEquals(expected, actual);         // Утверждение - сравнение 
+                                                // ожидаемого с действительным
+    }
+    
+}

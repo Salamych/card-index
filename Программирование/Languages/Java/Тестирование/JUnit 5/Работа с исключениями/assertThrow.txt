@@ -1,0 +1,7 @@
+@Test
+    public void testDivide() {
+        MathUtils mathUtils = new MathUtils();
+        assertThrows(ArithmeticException.class, // класс исключения
+                () -> mathUtils.divide(1, 0),   // вызов метода при помощи лямбда-выражения
+                "Divide by zero should throw"); // вывод сообщения в случае выброса ошибки 
+    }

@@ -1,0 +1,31 @@
+Функция run похожа на apply, точно так же ограничивая относительную область видимости, 
+но не возвращает объект-приемник.
+
+val menuFile = File("menu-file.txt")
+val servesDragonsBreath = menuFile.run {
+	readText().contains("Dragons's Breath")
+}
+
+run возвращает результат лямбды, в нашем случае истину или ложь.
+
+run может также использоваться для выполнения ссылки на функцию относительно объекта-приемника.
+
+fun nameIsLong(name: String) = name.length >= 20
+"Madrigal".run(::nameIsLong) // false
+"Polarcubis, Supreme Master of NuetHack".run(::nameIsLong) // true
+
+Вызов функций цепочкой при помощи run проще читать и анализировать.
+
+fun nameIsLong(name: String) = name.length >= 20
+fun playerCreateMessage(nameTooLong: Boolean): String{
+return if(nameTooLong){
+	"Name is too long. Please choose another name."
+  }else {
+	"Welcome, adveturer"
+  }
+}
+
+"Polarcubis, Supreme Master of NuetHack"
+.run(::nameIsLong)
+.run(::playerCreateMessage)
+.run(::println) // Name is too long. Please choose another name.

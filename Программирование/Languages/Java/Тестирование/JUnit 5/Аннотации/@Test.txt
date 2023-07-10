@@ -1,0 +1,21 @@
+Делает метод тестируемым
+
+package io.javabrains;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class MathUtilsTest {
+    
+    public MathUtilsTest() {
+    }
+
+    @Test
+    public void testSomeMethod() {
+        System.out.println("This test ran");
+    }
+    
+}
+
+
+Информирует машину JUnit о том, что этот метод нужно будет запускать

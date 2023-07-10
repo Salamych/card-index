@@ -1,0 +1,1 @@
+assertFalse(boolean condition, String message) - возвращает сообщение когда условие ложно(False)
