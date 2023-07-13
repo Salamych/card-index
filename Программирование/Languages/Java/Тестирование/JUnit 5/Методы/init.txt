@@ -1,0 +1,45 @@
+Метод init() служит для инициализации объекта.
+
+package io.javabrains;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+
+public class MathUtilsTest {
+
+    MathUtils mathUtils;
+    
+    @BeforeEach
+    public void init() {
+        mathUtils = new MathUtils();
+    }
+
+    @Test
+    public void testAdd() {
+        int expected = 2;                       // ожидаемое значение
+        int actual = mathUtils.add(1, 1);  // значение которое получилось
+
+        assertEquals(expected,
+                actual, 
+         "The add method should add two numbers");         // Утверждение - сравнение 
+                                                                  // ожидаемого с действительным
+    }
+
+    @Test
+    public void testDivide() {
+        assertThrows(
+                ArithmeticException.class,
+                //                NullPointerException.class,
+                () -> mathUtils.divide(1, 0),
+                "Divide by zero should throw");
+    }
+
+    @Test
+    public void testComputeCircleArea() {
+        assertEquals(314.1592653589793,
+                mathUtils.computeCircleArea(10),
+                "Should return right circle area");
+    }
+
+}

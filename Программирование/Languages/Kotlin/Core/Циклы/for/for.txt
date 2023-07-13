@@ -1,0 +1,9 @@
+В языке Kotlin все циклы опираются на итерации (на Java им эквивалентен цикл foreach).
+
+val patronList = mutableListOf("Eli","Mordoc","Sophie")
+
+for(patron in patronList){
+println("Good evening, $patron")
+}
+
+in определяет объект для обхода в цикле for.

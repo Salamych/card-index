@@ -1,0 +1,31 @@
+@Nested - "вложенность" это способ сгруппировать тесты таким образом,
+чтобы они стали частью одного целого.
+
+
+public class MathUtilsTest {
+
+    MathUtils mathUtils;
+
+    @BeforeEach
+    public void init() {
+        mathUtils = new MathUtils();
+    }
+    
+    @Nested
+    class AddTest {
+
+        @Test
+        @DisplayName("Testing add method for +")
+        public void testAddPositive() {
+            assertEquals(2, mathUtils.add(1, 1),
+                    "The add method should add two numbers");
+        }
+
+        @Test
+        @DisplayName("Testing add method for -")
+        public void testAddNegative() {
+            assertEquals(-2, mathUtils.add(-1, -1),
+                    "The add method should add two numbers");
+        }
+    }
+}

@@ -1,0 +1,14 @@
+@DisplayName - служит для отображения имени и функциональности тестируемого метода.
+
+ 
+    @Test
+    @DisplayName("Testing add method")
+    public void testAdd() {
+        int expected = 2;                       // ожидаемое значение
+        int actual = mathUtils.add(1, 1);  // значение которое получилось
+
+        assertEquals(expected,
+                actual, 
+         "The add method should add two numbers");         // Утверждение - сравнение 
+                                                                  // ожидаемого с действительным
+    }

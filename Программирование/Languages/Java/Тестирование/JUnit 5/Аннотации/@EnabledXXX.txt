@@ -1,0 +1,9 @@
+@EnabledOnOs(OS.LINUX) - выполнять только на Линукс
+
+@EnabledOnJre(JRE.JAVA_11) - выполнять только на JAVA_11
+
+@EnabledIf
+
+@EnabledIfSystemProperty
+
+@EnabledIfEnvironmentVariable 

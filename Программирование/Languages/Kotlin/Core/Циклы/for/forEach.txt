@@ -1,0 +1,8 @@
+Функция forEach обходит каждый элемент в списке - последовательно от начала до конца - 
+и передает каждый элемент анонимной функции в аргументе.
+
+val patronList = mutableListOf("Eli","Mordoc","Sophie")
+
+patronList.forEach { patron ->
+        println("Good evening, $patron")
+    }

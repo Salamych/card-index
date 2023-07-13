@@ -1,0 +1,7 @@
+Преобразовывать списки в множества и обратно можно при помощи функций:
+
+toSet()
+toList()
+toMutableSet()
+toMutableList()
+distinct() //toSet()+toList()

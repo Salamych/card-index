@@ -1,0 +1,40 @@
+TestInfo и TestReporter - интерфейсы, служащие для вывода(отчета) метаданных о тесте.
+
+
+
+public class MathUtilsTest {
+
+    MathUtils mathUtils;
+    TestInfo testInfo;
+    TestReporter testReporter;
+
+    @BeforeEach
+    public void init(TestInfo testInfo, TestReporter testReporter) {
+        this.testInfo = testInfo;
+        this.testReporter = testReporter;
+        mathUtils = new MathUtils();
+    }
+
+@Test
+    @Tag("Math")
+    @DisplayName("Multiply method")
+    void testMultiply() {
+        System.out.println("Running "+testInfo.getDisplayName() + " with tags "+testInfo.getTags()); //Running Multiply method with tags [Math]
+        assertAll(
+                () -> assertEquals(4, mathUtils.multiply(2, 2)),
+                () -> assertEquals(0, mathUtils.multiply(2, 0)),
+                () -> assertEquals(-2, mathUtils.multiply(2, -1))
+        );
+    }
+
+ @Test
+    @Tag("Math")
+    @DisplayName("Multiply method")
+    void testMultiply() {
+        testReporter.publishEntry("Running "+testInfo.getDisplayName() + " with tags "+testInfo.getTags());
+        assertAll(
+                () -> assertEquals(4, mathUtils.multiply(2, 2)),
+                () -> assertEquals(0, mathUtils.multiply(2, 0)),
+                () -> assertEquals(-2, mathUtils.multiply(2, -1))
+        );
+    }

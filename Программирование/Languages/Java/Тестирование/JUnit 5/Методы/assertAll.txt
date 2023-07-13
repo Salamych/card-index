@@ -1,0 +1,12 @@
+assertAll - позволяет проверять выполнения группы тестов. Использует лямбду.
+Можно собрать воедино несколько утверждений и проверить их.
+
+@Test
+    @DisplayName("Multiply method")
+    void testMultiply(){
+        assertAll(
+        () -> assertEquals(4,mathUtils.multiply(2, 2)),
+        () -> assertEquals(0,mathUtils.multiply(2, 0)),
+        () -> assertEquals(-2,mathUtils.multiply(2, -1))
+        );
+    }

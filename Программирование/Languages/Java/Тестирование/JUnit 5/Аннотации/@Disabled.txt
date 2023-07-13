@@ -1,0 +1,8 @@
+@Disabled - отключает тест.
+
+    @Test
+    @Disabled
+    @DisplayName("Method in working")
+    public void disableMethod() {
+    fail("Method is fail");
+    }

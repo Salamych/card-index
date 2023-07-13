@@ -1,0 +1,9 @@
+Цикл while подходит для случаев, когда цикл завершается по достижении 
+некоторого состояния, а не после определенного числа итераций.
+
+var orderCount = 0
+    while(orderCount <= 9){
+        placeOrder(uniquePatrons.shuffled().first(),
+                menuList.shuffled().first())
+        orderCount++
+    }

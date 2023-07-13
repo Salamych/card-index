@@ -1,0 +1,8 @@
+@TestInstance(TestInstance.Lifecycle.PER_METHOD) - стоит по умолчанию и каждый раз создает 
+экземпляр класса перед вызовом метода (Можно ее не указывать)
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS) - создает единственный экземпляр класса и с
+аннотацией @BeforeAll можно не делать метод статическим.
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+public class MathUtilsTest {

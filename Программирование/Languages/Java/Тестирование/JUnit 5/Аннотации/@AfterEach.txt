@@ -1,0 +1,6 @@
+@AfterEach - обозначает после завершения каждого из них
+
+@AfterEach
+    public void cleanup(){
+        System.out.println("Cleaning up ...");
+    }

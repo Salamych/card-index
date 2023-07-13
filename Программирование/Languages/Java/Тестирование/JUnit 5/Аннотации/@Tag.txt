@@ -1,0 +1,13 @@
+@Tag - делает пометку на тест/(группу тестов) и служит для управления помеченными
+тестами средствами IDE.
+
+    @Test
+    @Tag("Math")
+    @DisplayName("Multiply method")
+    void testMultiply() {
+        assertAll(
+                () -> assertEquals(4, mathUtils.multiply(2, 2)),
+                () -> assertEquals(0, mathUtils.multiply(2, 0)),
+                () -> assertEquals(-2, mathUtils.multiply(2, -1))
+        );
+    }

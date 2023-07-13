@@ -1,0 +1,76 @@
+List содержит упорядоченную коллекцию значений и может содержать повторяющиеся
+значения.
+
+listOf возвращает список, доступный только для чтения, заполненный элементами, 
+полученными из аргументов.
+
+val patronList: List<String> = listOf("Eli","Mordoc","Sophie")
+
+Можно извлекать элементы по индексу
+
+patronList[0]
+
+Функции извлечения первого и последнего элемента
+
+patronList.first()
+patronList.last()
+
+Если попытаться получить элемент с несуществующим индексом то вылетает
+ArrayIndexOutOfBoundsException
+
+getOrElse - функция безопатсного доступа по индексу - принимает два аргумента:
+первый - это запрашиваемый индекс (не в квадратных скобках), второй - это лямбда,
+которая генерирует значение по умолчанию вместо исключения, если запрашиваемого индекса
+не существует.
+
+val patronList = listOf("Eli","Mordoc","Sophie")
+patronList.getOrElse(4){"Unknown Patron"}
+
+getOrNul возвращает null вместо исключения
+
+val fifthPatron = patronList.getOrNull(4) ?: "Unknown Patron"
+
+Функция contains() служит для проверки содержит ли список определенный объект.
+
+if(patronList.contains("Eli")){
+        println("The tavern master says: Eli's in the back playing cards.")
+    }else{
+        println("The tavern master says: Eli's isn't here.")
+    }
+
+Функция contains() служит для проверки содержит ли список группу объектов.
+
+if(patronList.containsAll(listOf("Mordoc","Sophie"))){
+        println("The tavern master says: Yea, they're seated by the stew kettle.")
+    }else{
+        println("The tavern master says: Nay? they departed hours ago.")
+    }
+
+
+mutableListOf() создает изменяемый список
+
+val patronList = mutableListOf("Eli","Mordoc","Sophie")
+
+Функции toList и toMutableList позволяют превращать неизменяемые списки в изменяемые
+и обратно прямо в процессе выполнения.
+
+-------------------Мутаторы------------------
+[]= - Присваивает значение по индексу; возбуждает исключение, если индекса не существует. 
+
+add - Добавляет элемент в конец списка, увеличивая размер на один элемент.
+
+add(по индексу) - Добавляет элемент в список по индексу, увеличивая размер на один элемент. 
+                  Возбуждает исключение, если индекса не существует.
+
+addAll - Добавляет все элементы из другой коллекции, если они того же типа.
+
++= - Добавляет элемент или коллекцию элементов в список: 
+mutableListOf("Eli","Mordoc","Sophie") += listOf("Alex","Shruti") // [Eli, Mordoc, Sophie, Alex, Shruti]
+
+-= - Удаляет элемент или коллекцию элементов из списка 
+
+clear - Удаляет все элементы из списка
+
+removeIf - Удаляет все элементы из списка, которые удовлетворяют условию в лямбде: 
+val patronList = mutableListOf("Eli","Mordoc","Sophie")
+patronList.removeIf {it.contains("o")} // [Eli]

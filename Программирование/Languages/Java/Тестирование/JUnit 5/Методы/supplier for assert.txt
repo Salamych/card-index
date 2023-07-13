@@ -1,0 +1,11 @@
+supplier for assert - позволяет разгрузить методы assertXXX, сделать их
+легче посредством использования лямбды, так как просто ссылается на метод, 
+который может выполниться при провале теста, при удачном тесте объект сообщения
+не создается.
+
+        @Test
+        @DisplayName("Testing add method for -")
+        public void testAddNegative() {
+            assertEquals(-2, mathUtils.add(-1, -1),
+                    () -> "The add method should add two numbers");
+        }

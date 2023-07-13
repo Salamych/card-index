@@ -1,0 +1,8 @@
+@RepeatedTest - позволяет производить заданное количество вызова (повторений) теста.
+
+    @RepeatedTest(3)
+    public void testComputeCircleArea() {
+        assertEquals(314.1592653589793,
+                mathUtils.computeCircleArea(10),
+                "Should return right circle area");
+    }

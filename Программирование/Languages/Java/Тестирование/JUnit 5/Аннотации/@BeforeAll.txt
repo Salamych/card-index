@@ -1,0 +1,10 @@
+@BeforeAll - выполняется единожды перед созданием экземпляра, то есть
+когда создается класс. Следовательно нужно метод сделать статическим,
+иначе вылезет ошибка:
+org.junit.platform.commons.JUnitException: @BeforeAll method 'void io.javabrains.MathUtilsTest.beforeAllInit()' 
+must be static unless the test class is annotated with @TestInstance(Lifecycle.PER_CLASS).
+
+@BeforeAll
+static void beforeAllInit(){
+  System.out.println("This needs to run before all");
+}

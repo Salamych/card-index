@@ -1,0 +1,14 @@
+import static org.junit.jupiter.api.Assumptions.*;
+
+assumeTrue() - предположение
+
+    @Test
+    public void testDivide() {
+        boolean isServerUp = false;
+        assumeTrue(isServerUp);
+        assertThrows(
+                ArithmeticException.class,
+                //                NullPointerException.class,
+                () -> mathUtils.divide(1, 0),
+                "Divide by zero should throw");
+    }

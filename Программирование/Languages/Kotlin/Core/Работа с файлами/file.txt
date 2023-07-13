@@ -1,0 +1,10 @@
+import java.io.File
+
+val menuList = File("data/tavern-menu-items.txt") // название файла и путь к нему 
+    .readText()					  // Возвращает содержимое файла в виде строки
+    .split("\n")				  // Разбивает содержимое файла по символу перевода строки
+
+
+menuList.forEachIndexed{index,data ->
+        println("$index : $data")
+    }

@@ -1,0 +1,8 @@
+@BeforeEach - обозначает перед запуском каждого из них
+
+MathUtils mathUtils;
+    
+    @BeforeEach
+    public void init() {
+        mathUtils = new MathUtils();
+    }
