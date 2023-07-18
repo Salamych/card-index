@@ -1,0 +1,56 @@
+Spy (шпион) похожи на заглушки (stub), разница лиш в том, что spy запиывает
+информацию о то как были выполнены взаимодействия с внешней зависимостью.
+
+Шпион используется с заглушкой + запись взаимодествия с внешней зависимостью.
+
+package com.hubbersport.mokito.test_double.spy;
+
+import java.time.LocalDate;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+public class SpyTest {
+
+    @Test
+    public void demoSpy() {
+        BookRepositorySpy bookRepositorySpy = new BookRepositorySpy();
+        BookService bookService = new BookService(bookRepositorySpy);
+
+        Book book1 = new Book("1234", "Mockito in Action", 500, LocalDate.now());
+        Book book2 = new Book("1235", "JUnit 5 in Action", 400, LocalDate.now());
+        
+        bookService.addBook(book1);
+        assertEquals(0,bookRepositorySpy.timesCalled());
+        
+        bookService.addBook(book2);
+        assertEquals(1,bookRepositorySpy.timesCalled());
+        
+//        assertTrue(bookRepositorySpy.calledWith(book2));
+    }
+
+}
+
+Шпион заглушка:
+
+package com.hubbersport.mokito.test_double.spy;
+
+public class BookRepositorySpy implements BookRepository {
+
+    int saveCalled = 0;
+    Book lastAddedBook = null;
+
+    @Override
+    public void save(Book book) {
+        saveCalled++;
+        lastAddedBook = book;
+    }
+    
+    public int timesCalled(){
+    return saveCalled;
+    }
+    
+    public boolean calledWith(Book book){
+    return lastAddedBook.equals(book);
+    }
+
+}

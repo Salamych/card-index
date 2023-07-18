@@ -7,3 +7,9 @@ println("Good evening, $patron")
 }
 
 in определяет объект для обхода в цикле for.
+
+for(patron in patronList step 2){
+println("Good evening, $patron")
+}
+
+step 2 - показывает шаг итерации (по умолчанию стоит - step 1)

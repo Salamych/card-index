@@ -1,0 +1,58 @@
+Конструктор позволяет при его вызове определить начальные значения, необходимые для
+создания экземпляра класса. Эти значения затем можно использовать для инициализации
+свойств, объявленных внутри класса.
+
+class Player(_name: String,
+    _healthPoints: Int,
+    _isBlessed: Boolean,
+    _isImmortal: Boolean) {
+    var name = _name
+        get() = field.capitalize()
+       private set(value) {
+            field = value.trim()
+        }
+    var healthPoints = _healthPoints
+    val isBlessed = _isBlessed
+    private val isImmortal = _isImmortal
+
+Временным переменным, в том числе параметрам, которые используются только один раз,
+часто дают имена, начинающиеся с подчеркивания. Это показывает, что они одноразовые.
+
+------------Объявление свойств в главном конструкторе---------------
+
+Для свойств с методами чтения и записи по умолчанию Kotlin позволяет объявить параметр
+и свойство в одном определении, без создания временной переменной.
+
+class Player(_name: String,
+             var healthPoints: Int,
+             val isBlessed: Boolean,
+             private val isImmortal: Boolean) {
+    var name = _name
+        get() = field.capitalize()
+       private set(value) {
+            field = value.trim()
+        }
+
+----------Аргументы по умолчанию---------------
+
+Объявляя конструктор, также можно указать значения по умолчанию, которые получат параметры
+в отсутствие соответствующих им аргументов.
+
+package com.bignerdranch.nyethack
+
+class Player(_name: String,
+             var healthPoints: Int = 100,
+             val isBlessed: Boolean,
+             private val isImmortal: Boolean) {
+    var name = _name
+        get() = field.capitalize()
+       private set(value) {
+            field = value.trim()
+        }
+    constructor(name: String) : this(
+        name,
+        isBlessed = true,
+        isImmortal = false
+    ){
+        if(name.toLowerCase() == "kar") healthPoints = 40
+    }

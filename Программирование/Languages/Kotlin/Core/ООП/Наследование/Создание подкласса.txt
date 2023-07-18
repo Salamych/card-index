@@ -1,0 +1,61 @@
+Подкласс обладает всеми чертами наследуемого класса, который также называют
+родительским классом или суперклассом.
+
+Чтобы класс можно было унаследовать, его надо отметить ключевым словом open.
+
+package com.bignerdranch.nyethack
+
+open class Room(val name: String) {
+    fun description() = "Room $name"
+
+    fun load() = "Nothing much to see here..."
+}
+
+class TownSquare : Room("Town Square")
+
+Объявление класса TownSquare содержит имя класса слева от оператора : и вызов конструктора
+справа. Вызов конструктора указывает на то, какой родительский конструктор нужно вызвать для
+создания экземпляра TownSquare и какие аргументы ему передать. В данном случае TownSquare - 
+это версия Room с названием "Town Square".
+
+Ключевое слово override служит для переопределения методов.
+Чтобы метод родительского класса можно было переопределить, его нужно пометить ключевым словом open.
+
+package com.bignerdranch.nyethack
+
+open class Room(val name: String) {
+    fun description() = "Room $name"
+
+    open fun load() = "Nothing much to see here..."
+}
+
+class TownSquare : Room("Town Square"){
+    override fun load() = "The villagers rally and cheer as you enter!"
+}
+
+----------------------Ключевое слово super--------------
+
+Ключевое слово super ссылается на класс суперкласса и открывает доступ ко всем функциям и 
+свойствам с уровнем доступа public или protected.
+
+package com.bignerdranch.nyethack
+
+open class Room(val name: String) {
+    protected open val dangerLevel = 5 // 1 to 10
+
+    fun description() = "Room $name"
+
+    open fun load() = "Nothing much to see here..."
+}
+
+class TownSquare : Room("Town Square"){
+    override val dangerLevel = super.dangerLevel - 3
+    
+    override fun load() = "The villagers rally and cheer as you enter!"
+}
+
+----------------Ключевое слово final---------------------
+
+Ключевое слово final запрещает возможность переопределения функции. Ключевое слово final
+дает гарантию, что функция не будет переопределена, даже если класс, в котором она 
+объявлена, имеет модификатор open.

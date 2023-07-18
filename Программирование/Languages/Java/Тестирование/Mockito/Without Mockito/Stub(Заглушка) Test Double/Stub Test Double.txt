@@ -1,0 +1,52 @@
+Заглушка (stub) - предоставляет предопределенные ответы выполненных методов выполненяемых
+во время теста.
+
+Мы предоставляем объект заглушки для внешней зависимости. Всякий раз когда тестируемый метод
+вызывает метод на внешнем сервере, зависимости обычно предоставляют нашему методу несколько 
+предопределенных ответов - жестко запрограммированное поведение.
+
+package com.hubbersport.mokito.test_double.stub;
+
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+public class StubTest {
+    @Test
+    public void demoStub(){
+    BookRepository bookRepository = new BookRepositoryStub();
+        BookService bookService = new BookService(bookRepository);
+        
+        List<Book> newBooksWithAppliedDiscount = bookService.getNewBooksWithAppliedDiscount(10, 7);
+        
+        assertEquals(2,newBooksWithAppliedDiscount.size());
+        assertEquals(450,newBooksWithAppliedDiscount.get(0).getPrice());
+        assertEquals(360,newBooksWithAppliedDiscount.get(1).getPrice());
+    }
+    
+}
+
+
+Класс заглушка:
+
+package com.hubbersport.mokito.test_double.stub;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class BookRepositoryStub implements BookRepository{
+
+    @Override
+    public List<Book> findNewBooks(int days) {
+        List<Book> newBooks = new ArrayList<>();
+        Book book1 = new Book("1234","Mockito in Action",500,LocalDate.now());
+        Book book2 = new Book("1234","JUnit 5 in Action",400,LocalDate.now());
+        
+        newBooks.add(book1);
+        newBooks.add(book2);
+        
+        return newBooks;
+    }
+    
+}

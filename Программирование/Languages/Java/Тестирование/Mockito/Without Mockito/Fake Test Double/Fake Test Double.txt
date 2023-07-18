@@ -1,0 +1,25 @@
+Fake Test Double - создание поддельного простого объекта для тестирования.
+
+package com.hubbersport.mokito.test_double.fake;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+public class FakeBookRepository implements BookRepository{
+    
+    Map<String, Book> bookStore = new HashMap<>();
+
+    @Override
+    public void save(Book book) {
+        bookStore.put(book.getBookId(), book);
+    }
+
+    @Override
+    public Collection<Book> findAll() {
+        return bookStore.values();
+    }
+    
+}
+
+FakeBookRepository создает более легкий вариант хранилища в виде HashMap.

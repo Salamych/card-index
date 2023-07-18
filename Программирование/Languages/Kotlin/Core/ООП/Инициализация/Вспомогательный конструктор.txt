@@ -1,0 +1,54 @@
+Вспомогательный конструктор определяет альтернативный способ создания класса(который
+соответсвует требованиям главного констуктора).
+
+Вспомогательный конструктор должен вызывать главный конструктор, передавая ему все
+требуемые аргументы, или другой вспомогательный конструктор, который следует тому же
+правилу.
+
+package com.bignerdranch.nyethack
+
+class Player(_name: String,
+             var healthPoints: Int,
+             val isBlessed: Boolean,
+             private val isImmortal: Boolean) {
+    var name = _name
+        get() = field.capitalize()
+       private set(value) {
+            field = value.trim()
+        }
+    constructor(name: String) : this(
+        name,
+        healthPoints = 100,
+        isBlessed = true,
+        isImmortal = false
+    )
+Ключевое слово this в данном случае ссылается на экземпляр класса, для которого объявлен 
+конструктор. Конкретно в этом случае this вызывает другой конструктор, объявленный внутри
+класса, - главный конструктор.
+
+Во вспомогательном конструкторе можно определить также логику инициализации - код,
+выполняющийся в момент создания экземпляра класса.
+
+package com.bignerdranch.nyethack
+
+class Player(_name: String,
+             var healthPoints: Int,
+             val isBlessed: Boolean,
+             private val isImmortal: Boolean) {
+    var name = _name
+        get() = field.capitalize()
+       private set(value) {
+            field = value.trim()
+        }
+    constructor(name: String) : this(
+        name,
+        healthPoints = 100,
+        isBlessed = true,
+        isImmortal = false
+    ){
+        if(name.toLowerCase() == "kar") healthPoints = 40
+    }
+
+Хотя во вторичном конструкторе можно определить альтернативную логику инициализации, в нем,
+в отличии от главного конструктора, нельзя объявить свойства. Свойства класса можно объявить
+только в главном конструкторе или на уровне класса. 

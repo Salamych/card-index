@@ -1,0 +1,12 @@
+Оператор is проверяет является ли объект экземпляром другого объекта.
+
+import com.bignerdranch.nyethack.Room
+
+ var room = Room("Foyer")
+
+ room is Room
+
+res0: kotlin.Boolean = true
+
+Тип объекта слева от оператора is сравнивается с типом, указанным справа. Выражение
+возвращает true, если типы совпадают, и false, если нет.

@@ -1,0 +1,16 @@
+Приведение типа позволяет обращаться к объекту так, как будто он - экземпляр
+другого типа. Это позволяет манипулировать объектом, как если бы его тип
+был объявлен явно (например, вызывать его функции).
+
+fun printIsSourceOfBlessings(any: Any) {
+	val isSourceOfBlessings = if(any is Player) {
+		any.isBlessed
+	} else {
+		(any as Room).name == "Fount of Blessings"
+	}
+	println("$any is a source of blessings: $isSourceOfBlessings")
+}
+
+Оператор as обозначает приведение типа.
+
+Приведение типов может выкидывать ClassCastException если типы нельзя привести друг к другу.

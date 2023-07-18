@@ -1,0 +1,12 @@
+Функции класса - это объявленные внутри класса функции.
+
+class Player {
+    fun castFireball(numFireballs: Int = 2) =
+        println("A glass of Fireball springs into existence. ($numFireballs)")
+}
+
+
+Вызов функции
+
+val player = Player()
+    player.castFireball()
