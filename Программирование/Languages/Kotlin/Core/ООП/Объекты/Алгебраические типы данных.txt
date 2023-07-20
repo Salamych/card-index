@@ -1,0 +1,11 @@
+Алгебраические типы данных (ADT) позволяют выражать закрытое множество возможных
+подтипов, еоторые могут быть ассоциированными с заданным типом. Перечисления - 
+это простейшая форма ADT.
+
+Использование изолированного класса для моделирования состояния.
+
+sealed class StudentStatus {
+	object NotEnrolled : StudentStatus()
+	class Active(val courseId: String) : StudentStatus()
+	object Graduated : StudentStatus() 
+}

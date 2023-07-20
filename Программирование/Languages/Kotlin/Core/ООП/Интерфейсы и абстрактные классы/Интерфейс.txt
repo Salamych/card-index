@@ -1,0 +1,50 @@
+Интерфейс позволяет перечислить общие свойства и поведение набра классов без
+их реализации.
+
+Интерфейс объявляется при помощи ключевого слова interface
+
+interface Fightable{
+    var healthPoints: Int
+    val diceCount: Int
+    val diceSides: Int
+    val demageRoll: Int
+    
+    fun attack(opponent: Fightable): Int
+}
+
+-----------------------Объявление интерфейса------------------
+class Player(_name: String,
+             override var healthPoints: Int = 100,
+             val isBlessed: Boolean,
+             private val isImmortal: Boolean) : Fightable{
+
+    override val diceCount: Int = 3
+    override val diceSides: Int = 6
+
+    override fun attack(opponent: Fightable): Int {
+        val demageDealt = if(isBlessed){
+            demageRoll * 2
+        }else{
+            demageRoll
+        }
+        opponent.healthPoints -= demageDealt
+        return demageDealt
+    }
+
+--------------------------Реализация по умолчанию-------------------------
+
+package com.bignerdranch.nyethack
+
+import kotlin.random.Random
+
+interface Fightable{
+    var healthPoints: Int
+    val diceCount: Int
+    val diceSides: Int
+    val demageRoll: Int
+        get()=(0 until diceCount).map{
+            Random.nextInt(diceSides + 1)
+        }.sum()
+
+    fun attack(opponent: Fightable): Int
+}
