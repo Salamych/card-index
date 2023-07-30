@@ -1,0 +1,19 @@
+В соответсвии с соглашениями, файлам, содержащим только расширения, присваиваются
+имена, начинающиеся с имени расширяемого типа и заканчивающиеся - Ext.
+
+IterableExt.kt
+
+package com.bignerdranch.nyethack.extensions
+
+fun <T> Iterable<T>.random(): T = this.shuffled().first()
+
+Когда расширение определяется в отдельном файле, его необходимо импортировать в каждый
+файл, где оно будет использоваться.
+
+import com.bignerdranch.nyethack.extensions.random
+
+
+Если нужно импортировать функцию или класс, но не его имя, можно воспользоваться оператором
+as, чтобы присвоить другое имя, которое будет использоваться только в этом файле.
+
+import com.bignerdranch.nyethack.extensions.random as randomizer

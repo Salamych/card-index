@@ -1,0 +1,29 @@
+package com.hubbersport.mokito.behavior.verification;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+@ExtendWith(MockitoExtension.class)
+public class BookServiceTest {
+    
+    @InjectMocks
+    private BookService bookService;
+    
+    @Mock
+    private BookRepository bookRepository;
+    
+    @Test
+    public void testAddBook(){
+        Book book = new Book(null, "Mockito in Action", 500, LocalDate.now());   
+        bookService.addBook(book);
+        verify(bookRepository).save(book);                                 // проверка вызывается ли метод save(book)
+    }
+}

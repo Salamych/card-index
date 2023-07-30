@@ -1,0 +1,38 @@
+package com.hubbersport.mokito.argument_captor;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+@ExtendWith(MockitoExtension.class)
+public class BookServiceTest {
+
+    @InjectMocks
+    private BookService bookService;
+
+    @Mock
+    private BookRepository bookRepository;
+   
+    @Test
+    public void testSaveBook() {
+        BookRequest bookRequest = new BookRequest("Mockito in Action", 500, LocalDate.now());
+        ArgumentCaptor<Book> bookArgumentCaptor = ArgumentCaptor.forClass(Book.class);       //создание захватчика аргументов и захват аргументов класса Book
+        bookService.addBook(bookRequest);
+        verify(bookRepository).save(bookArgumentCaptor.capture());   // проверка и фиксирование захваченных аргументов
+        Book book = bookArgumentCaptor.getValue();                   // создание экземпляра Book при помощи вызова значений у захватчика аргументов
+        assertEquals("Mockito in Action", book.getTitle());          // проверка утверждений на соответсвие названию
+    }
+        
+}
+
+Захватчик аргументов (ArgumentCaptor<Т>) предназначен для захвата аргументов имитационного
+метода, чтобы можно было проверять утверждения на основе захваченных аргументов.

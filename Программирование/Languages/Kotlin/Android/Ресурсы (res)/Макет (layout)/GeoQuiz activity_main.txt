@@ -1,0 +1,95 @@
+Виджеты входят в иерархию объектов View, называемую иерархией представления.
+
+Корневым элементом иерархии представления является элемент LinearLayout.
+В нем должно быть указано пространство имен XML- ресурсов Android 
+http://schemas.android.com/apk/res/android.
+
+LinearLayout наследует от подкласса View виджет ViewGroup, который предназначен для
+хранения и размещения других виджетов. LinearLayout используется в тех случаях,
+когда нужно выстроить виджеты в один столбец или строку. Другие подклассы ViewGroup - 
+ConstraintLayout и FrameLayout.
+
+Если виджет содержится в ViewGroup, он называется потомком ViewGroup. Корневой элемент
+LinearLayout имеет двух потомков: TextView и другой элемент LinearLayout. У LinearLayout
+имеются два собственных потомка Button.
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:text="@string/question_text"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/true_button"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/false_button"/>
+        </LinearLayout>
+</LinearLayout>
+
+-------------------------------------------------------------------
+----------------------Атрибуты виджетов-------------------------
+-------------------------------------------------------------------
+
+----------android:layout_width и android:layout_height----------------
+
+Атрибуты android:layout_width и android:layout_height, определяющие ширину и высоту,
+необходимы практически для всех разновиностей виджетов. Как правило, им задаются
+значения match_parent или wrap_content:
+	match_parent - размеры представления определяются размерами родителя;
+	wrap_content - размеры представления определяются размерами содержимого.
+
+В корневом элементе LinearLayout атрибуты ширины и высоты равны match_parent. Элемент
+LinearLayout - корневой, но у него все равно есть родитель - представление Android
+для размещения иерархии представлений приложения.
+
+У других виджетов макета ширине и высоте задается значение wrap_content.
+
+Виджет TextView чуть больше содержащегося в нем текста из-за атрибута
+android:padding="24dp". Этот атрибут приказывает виджету добавить заданный отступ
+вокруг содержимого при определении размера, чтобы текст вопроса не соприкасался
+с кнопкой. (dp - это пикселы, не зависящие от плотности (density-independent pixels)).
+
+
+---------------------android:orientation------------------------------
+
+Атрибут android:orientation двух виджетов LinearLayout определяет, как будут выстаиваться
+потомки - по вертикали или горизонтали. Корневой элемент LinearLayout имеет вертикальную
+ориентацию; у его потомка LinearLayout горизонтальная ориентация.
+
+Порядок определения потомков устанавливает порядок их отображения на экране. В
+вертикальном элементе LinearLayout потомок, определенный первым, располагается выше
+остальных. В горизонтальном элементе LinearLayout первый потомок является крайним
+левым. (Если на устройстве используется язык с письменностью справа на лево, такие
+как арабский или иврит - в таком случае первый потомок будет находиться в крайней
+правой позиции.)
+
+
+---------------------android:text------------------------------------
+
+Виджеты TextView и Button содержат атрибут android:text. Этот атрибут сообщает виджету, 
+какой текст должен в нем отображаться.
+
+Значения атрибутов представляют собой не строковые литералы, а ссылки на строковые 
+ресурсы с синтаксисом @string/.
+
+Виджету можно назначить фиксированную строку (например, android:text="True"), но так
+делать не стоит. Лучше размещать строки в отдельном файле, а затем ссылаться на них,
+так как использование строковых ресурсов упрощает локализацию.  

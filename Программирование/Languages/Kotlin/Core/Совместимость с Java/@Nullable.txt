@@ -1,0 +1,48 @@
+@Nullable предупреждает пользователя API, что метод может (а не обязан) вернуть null.
+
+package parapop;
+
+import org.jetbrains.annotations.Nullable;
+
+public class Jhava {
+    public String utterGreeting(){
+        return "BLARGH";
+    }
+    @Nullable
+    public String determineFriendshipLevel(){
+        return null;
+    }
+}
+
+Вызов в Kotlin
+
+package parapop
+
+fun main() {
+    val adversary = Jhava()
+    println(adversary.utterGreeting())
+
+    val friendshipLevel = adversary.determineFriendshipLevel()
+    println(friendshipLevel?.lowercase() ?: "It's complicated.")
+}
+
+
+--------------------@NotNull------------------------------------
+
+@NotNull сообщает, что значение точно не будет null.
+
+package parapop;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+public class Jhava {
+    @NotNull
+    public String utterGreeting(){
+        return "BLARGH";
+    }
+    @Nullable
+    public String determineFriendshipLevel(){
+        return null;
+    }
+}

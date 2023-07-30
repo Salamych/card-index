@@ -1,0 +1,40 @@
+У макета activity по умолчанию есть два представления (view): ConstraintLayout и TextView.
+
+Пркдставления - это структурные элементы, из которых составляется пользовательский интерфейс.
+Все что видно на экране - это представление. Представления, которые видит пользователь или с 
+которыми взаимодествует, называются виджетами.
+
+Одни виджеты могут выводить текст, другие - графику. Третьи, например кнопки, выполняют 
+действия при касании. 
+
+В Android SDK предусмотренно множество виджетов, которые можно настраивать для получения
+нужного оформления и поведения. Каждый виджет является экземпляром класса View или одного
+из его подклассов (например, TextView или Button).
+
+Объект ViewGroup - это такой подвид View, который содержит и упорядочивает другие виджеты.
+При этом сам ViewGroup контент не отображает. Он распоряжается там, где отображается 
+содержимое других представлений. Объекты ViewGroup еще часто называют макетами.
+
+В макете activity по умолчанию ConstraintLayout  - это ViewGroup, отвечающий за расположение
+своего единственного дочернего элемента, виджета TextView.
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

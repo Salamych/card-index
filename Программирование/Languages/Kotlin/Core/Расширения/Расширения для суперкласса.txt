@@ -1,0 +1,100 @@
+Расширения не полагаются на наследование, но их можно сочетать с наследованием для
+увеличения области видимости.
+
+fun String.addEnthusiasm(amount: Int = 1) = this + "!".repeat(amount)
+
+fun Any.easyPrint() = println(this)
+
+fun main(args: Array<String>){
+   "Madrigal has left the building".addEnthusiasm().easyPrint()
+    42.easyPrint()
+
+}
+
+
+-------------------Обобщеные функции-расширения-------------------------
+
+Функции могут участвовать в цепочке, если они возвращают объект-приемник или иной объект, 
+для которого вызывать последующие функции.
+
+fun String.addEnthusiasm(amount: Int = 1) = this + "!".repeat(amount)
+
+fun <T> T.easyPrint(): T{
+    println(this)
+    return this
+}
+
+fun main(args: Array<String>){
+   "Madrigal has left the building".easyPrint().addEnthusiasm().easyPrint()
+    42.easyPrint()
+
+}
+
+
+Расширения для обобщеных типов имеются и в стандартной библиотеке Kotlin. Например функция let
+
+public inline fun <T, R> T.let(block: (T) -> R): R {
+	return block(this)
+}
+
+let объявлена как обобщенная функция расширения, что позволяет ей работать со всеми типами.
+Она принимает лямбду, которая получает объект приемник в качестве аргумента (T) и возвращает
+значение некоторого нового типа R.
+
+Объявление функции-расширения встраиваемой (ключевое слово inline), если она принимает лямбду,
+уменьшает затраты памяти.
+
+
+------------------------------Свойства-расширения-------------------------------
+
+Кроме функций-расширений, добавляющих новые возможности, такжк можно объявлять свойства-расширения.
+
+val String.numVowels
+    get() = count{"aeiouy".contains(it)}
+
+fun String.addEnthusiasm(amount: Int = 1) = this + "!".repeat(amount)
+
+fun <T> T.easyPrint(): T{
+    println(this)
+    return this
+}
+
+fun main(args: Array<String>){
+   "Madrigal has left the building".easyPrint().addEnthusiasm().easyPrint()
+    42.easyPrint()
+    "How many vowels?".numVowels.easyPrint()                                   // 5
+}
+
+
+------------------------Расширения для типов с поддержкой null------------------------------
+
+Объявление расширения для типа с поддержкой null позволит обрабатывать значение null
+в теле функции расширения, а не в точке вызова.
+
+val String.numVowels
+    get() = count{"aeiouy".contains(it)}
+
+fun String.addEnthusiasm(amount: Int = 1) = this + "!".repeat(amount)
+
+fun <T> T.easyPrint(): T{
+    println(this)
+    return this
+}
+
+infix fun String?.printWithDefault(default: String) = print(this ?: default)
+
+fun main(args: Array<String>){
+   "Madrigal has left the building".easyPrint().addEnthusiasm().easyPrint()
+    42.easyPrint()
+    "How many vowels?".numVowels.easyPrint()
+
+    val nullableString: String? = null
+    nullableString printWithDefault "Default string"
+}
+
+Ключевое слово infix доступно для расширений и функций класса с одним аргументом и позволяет
+использоватьболее ясный синтаксис вызова функции. Если функция объявлена с infix, можно отбросить 
+точку между объектом-приемником и вызовом функции, а такжк скобки вокруг аргумента.
+
+null printWithDefault "Default string" // с infix 
+null.printWithDefault("Default string") // без infix 

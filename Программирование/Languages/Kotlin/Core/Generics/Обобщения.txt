@@ -1,0 +1,252 @@
+Обобщеный тип - это класс, конструктор которого принимает аргументы любого типа.
+
+Обобщения могут хранить элементы любого типа - это позволяет функциям и типам
+работатьс типами, которые еще не известны вам и вашему компилятору. Обобщения
+расширяют область повторного использования определения классов, потому что 
+позволяют определениям работать со многими типами.
+
+Обобщеные типы, как и другие типы в Kotlin, поддерживаются механизмом автоматического 
+определения типов.
+
+class LootBox <T> (item: T){
+    private var loot: T = item
+}
+
+class Fedora(val name: String, val value: Int)
+
+class Coin(val value: Int)
+
+fun main(args: Array<String>){
+    val lootBoxOne: LootBox<Fedora> = LootBox(Fedora("a generic-looking fedora",15))
+    val lootBoxTwo: LootBox<Coin> = LootBox(Coin(15))
+}
+
+-----------------------Обобщеные функции-------------------
+
+Обобщеные параметры типа также работают и с функциями.
+
+class LootBox <T> (item: T){
+    var open = false
+    private var loot: T = item
+
+    fun fetch(): T? {
+        return loot.takeIf { open }
+    }
+}
+
+class Fedora(val name: String, val value: Int)
+
+class Coin(val value: Int)
+
+fun main(args: Array<String>){
+    val lootBoxOne: LootBox<Fedora> = LootBox(Fedora("a generic-looking fedora",15))
+    val lootBoxTwo: LootBox<Coin> = LootBox(Coin(15))
+
+    lootBoxOne.open = true
+    lootBoxOne.fetch()?.run {
+        println("You retrieve $name from the box!")
+    }
+}
+
+
+--------------------------Несколько параметров обобщеного типа-------------------------------
+
+class LootBox <T> (item: T){
+    var open = false
+    private var loot: T = item
+
+    fun fetch(): T? {
+        return loot.takeIf { open }
+    }
+
+    fun <R> fetch(lootModFunction: (T) -> R): R? {
+        return lootModFunction(loot).takeIf { open }
+    }
+}
+
+class Fedora(val name: String, val value: Int)
+
+class Coin(val value: Int)
+
+fun main(args: Array<String>){
+    val lootBoxOne: LootBox<Fedora> = LootBox(Fedora("a generic-looking fedora",15))
+    val lootBoxTwo: LootBox<Coin> = LootBox(Coin(15))
+
+    lootBoxOne.open = true
+    lootBoxOne.fetch()?.run {
+        println("You retrieve $name from the box!")
+    }
+
+    val coin = lootBoxOne.fetch(){
+        Coin(it.value * 3)
+    }
+    coin?.let{println(it.value)}
+}
+
+-----------Ограничения обобщений-------------------------
+
+Добавление ограничения к параметру типа Т. Теперь в параметре можно использовать
+подклассы, являющиеся наследниками класса Loot.
+
+class LootBox <T : Loot> (item: T){
+    var open = false
+    private var loot: T = item
+
+    fun fetch(): T? {
+        return loot.takeIf { open }
+    }
+
+    fun <R> fetch(lootModFunction: (T) -> R): R? {
+        return lootModFunction(loot).takeIf { open }
+    }
+}
+
+open class Loot(val value: Int)
+
+class Fedora(val name: String, value: Int) : Loot(value)
+
+class Coin(value: Int) : Loot(value)
+
+fun main(args: Array<String>){
+    val lootBoxOne: LootBox<Fedora> = LootBox(Fedora("a generic-looking fedora",15))
+    val lootBoxTwo: LootBox<Coin> = LootBox(Coin(15))
+
+    lootBoxOne.open = true
+    lootBoxOne.fetch()?.run {
+        println("You retrieve $name from the box!")
+    }
+
+    val coin = lootBoxOne.fetch(){
+        Coin(it.value * 3)
+    }
+    coin?.let{println(it.value)}
+}
+
+
+------------------ vararg и get----------------------------------------
+
+Ключевое слово vararg позволяет передавать произвольное количество аргументов в конструктор.
+
+Переменная будет интерпретироваться компилятором как массив элементов, а не как один элемент,
+что позволит конструктору принять несколько значений.
+
+class LootBox <T : Loot> (vararg item: T){
+    var open = false
+    private var loot: Array<out T> = item
+
+    fun fetch(item: Int): T? {
+        return loot[item].takeIf { open }
+    }
+
+    fun <R> fetch(item: Int, lootModFunction: (T) -> R): R? {
+        return lootModFunction(loot[item]).takeIf { open }
+    }
+}
+
+open class Loot(val value: Int)
+
+class Fedora(val name: String, value: Int) : Loot(value)
+
+class Coin(value: Int) : Loot(value)
+
+fun main(args: Array<String>){
+    val lootBoxOne: LootBox<Fedora> = LootBox(Fedora("a generic-looking fedora",15),
+        Fedora("a dazzling magenta fedora",25))
+    val lootBoxTwo: LootBox<Coin> = LootBox(Coin(15))
+
+    lootBoxOne.open = true
+    lootBoxOne.fetch(1)?.run {
+        println("You retrieve $name from the box!")
+    }
+
+    val coin = lootBoxOne.fetch(0){
+        Coin(it.value * 3)
+    }
+    coin?.let{println(it.value)}
+}
+
+Ключевое слово out является частью возвращаемого типа любой переменной, объявленной как vararg.
+
+Перегрузка метода get().
+
+class LootBox <T : Loot> (vararg item: T){
+    var open = false
+    private var loot: Array<out T> = item
+
+    operator fun get(index: Int): T? = loot[index].takeIf { open }
+
+    fun fetch(item: Int): T? {
+        return loot[item].takeIf { open }
+    }
+
+    fun <R> fetch(item: Int, lootModFunction: (T) -> R): R? {
+        return lootModFunction(loot[item]).takeIf { open }
+    }
+}
+
+open class Loot(val value: Int)
+
+class Fedora(val name: String, value: Int) : Loot(value)
+
+class Coin(value: Int) : Loot(value)
+
+fun main(args: Array<String>){
+    val lootBoxOne: LootBox<Fedora> = LootBox(Fedora("a generic-looking fedora",15),
+        Fedora("a dazzling magenta fedora",25))
+    val lootBoxTwo: LootBox<Coin> = LootBox(Coin(15))
+
+    lootBoxOne.open = true
+    lootBoxOne.fetch(1)?.run {
+        println("You retrieve $name from the box!")
+    }
+
+    val coin = lootBoxOne.fetch(0){
+        Coin(it.value * 3)
+    }
+    coin?.let{println(it.value)}
+
+    val fedora = lootBoxOne[1]
+    fedora?.let { println(it.name) }
+}
+
+
+----------------------------in и out------------------------- 
+
+Параметр обобщеного типа может играть две роли: потребитель и производитель. Роль
+производителя подразумевает, что обобщеный параметр будет доступен для чтения (но
+не для записи), а роль потребителя означает, что обобщеный параметр будет доступен
+для записи.
+
+Ключевое слово out указывает что обобщеный параметр будет вести себя как производитель,
+то есть будет доступен для чтения, но не для записи.
+
+class Barrel <out T> (val item: T)
+
+fun main(args: Array<String>) {
+    var fedoraBarrel: Barrel<Fedora> = Barrel(Fedora("a generic-looking fedora",15))
+    var lootBarrel: Barrel<Loot> = Barrel(Coin(15))
+
+    lootBarrel = fedoraBarrel                   //out
+    val myFedora: Fedora = lootBarrel.item      //out
+
+    //fedoraBarrel = lootBarrel                 //in  
+    
+}
+
+
+class Barrel <in T> (item: T)
+
+fun main(args: Array<String>) {
+    var fedoraBarrel: Barrel<Fedora> = Barrel(Fedora("a generic-looking fedora",15))
+    var lootBarrel: Barrel<Loot> = Barrel(Coin(15))
+
+//    lootBarrel = fedoraBarrel                   //out
+//    val myFedora: Fedora = lootBarrel.item      //out
+
+    fedoraBarrel = lootBarrel                 //in
+
+}
+
+Ковариантность - out
+Контравариантность - in
+

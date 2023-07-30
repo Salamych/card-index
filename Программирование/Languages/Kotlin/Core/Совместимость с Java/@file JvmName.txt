@@ -1,0 +1,62 @@
+@file:JvmName изменяет имя создаваемого класса в Kotlin.
+
+@file:JvmName("Hero")
+package parapop
+
+fun main() {
+    val adversary = Jhava()
+    adversary.greeting = "Hello, Hero."
+    println(adversary.utterGreeting())
+
+    val friendshipLevel = adversary.determineFriendshipLevel()
+    println(friendshipLevel?.lowercase() ?: "It's complicated.")
+
+    val adversaryHitPoints = adversary.hitPoints
+    println(adversaryHitPoints.dec())
+    println(adversaryHitPoints.javaClass)
+}
+
+fun makeProclamation() = "Greetings, beast!"
+
+------------------Функции верхнего уровня----------------------
+
+Функции верхнего уровня, объявленные в Kotlin, доступны и вызываются в Java как статические
+методы. makeProclamation объявлена в Hero.kt, поэтому компилятор Kotlin создает класс с именем 
+HeroKt и поместит в него эту функцию как статический метод.
+
+package parapop;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+public class Jhava {
+    private int hitPoints = 52489112;
+    private String greeting;
+    @NotNull
+    public String utterGreeting(){
+        return greeting;
+    }
+    @Nullable
+    public String determineFriendshipLevel(){
+        return null;
+    }
+    public int getHitPoints() {
+        return hitPoints;
+    }
+
+    public void setHitPoints(int hitPoints) {
+        this.hitPoints = hitPoints;
+    }
+
+    public String getGreeting() {
+        return greeting;
+    }
+
+    public void setGreeting(String greeting) {
+        this.greeting = greeting;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Hero.makeProclamation());
+    }
+}

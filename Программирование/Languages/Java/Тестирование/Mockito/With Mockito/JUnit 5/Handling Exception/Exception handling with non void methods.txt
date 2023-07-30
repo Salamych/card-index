@@ -1,0 +1,34 @@
+package com.hubbersport.mokito.exception_handling;
+
+import java.sql.SQLClientInfoException;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InOrder;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+@ExtendWith(MockitoExtension.class)
+public class BookServiceTest {
+
+    @InjectMocks
+    private BookService bookService;
+
+    @Mock
+    private BookRepository bookRepository;
+
+// проверка на негативный результат
+    @Test
+    public void testTotalPriceOfBooks() throws SQLException {
+        when(bookRepository.findAllBooks()).thenThrow(SQLClientInfoException.class);   // когда репозиторий не найден, выбрасывай исключение
+        assertThrows(DatabaseReadException.class,() -> bookService.getTotalPriceOfBooks()) ; // исключение вызывается, когда при вызове метода нет доступа к базе данных
+    }
+
+  
+}

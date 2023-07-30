@@ -1,0 +1,18 @@
+@Throws включает информацию об исключении, которое возбуждается функцией.
+Это необходимо для корректного вызова функций в Java из Kotlin, которые 
+возбуждают исключения.
+
+@Throws(IOException::class)
+fun acceptApology() {
+    throw IOException()
+}
+
+Jhava.java
+
+public void appologize(){
+        try{
+            Hero.acceptApology();
+        }catch(IOException e){
+            System.out.println("Caught!");
+        }
+    }

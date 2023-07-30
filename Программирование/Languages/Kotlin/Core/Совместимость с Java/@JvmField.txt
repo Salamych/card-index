@@ -1,0 +1,119 @@
+@JvmField можно применить к свойсву Kotlin, чтобы разрешить пользователям Java
+использовать поле и избавить их от необходимости вызывать метод чтения.
+
+@file:JvmName("Hero")
+package parapop
+
+fun main() {
+    val adversary = Jhava()
+    adversary.greeting = "Hello, Hero."
+    println(adversary.utterGreeting())
+
+    val friendshipLevel = adversary.determineFriendshipLevel()
+    println(friendshipLevel?.lowercase() ?: "It's complicated.")
+
+    val adversaryHitPoints = adversary.hitPoints
+    println(adversaryHitPoints.dec())
+    println(adversaryHitPoints.javaClass)
+
+    adversary.offerFood()
+}
+
+fun makeProclamation() = "Greetings, beast!"
+
+@JvmOverloads
+fun handOverFood(leftHand: String = "berries", rightHand: String = "beef"){
+    println("Mmmmmmm... you hand over some delicious $leftHand and $rightHand")
+}
+
+class Spellbook {
+    @JvmField
+    val spells = listOf("Magic Ms. L", "Lay on Hans")
+}
+
+
+@JvmField можно использовать для выражения статических значений во вспомогательных объектах.
+
+@file:JvmName("Hero")
+package parapop
+
+fun main() {
+    val adversary = Jhava()
+    adversary.greeting = "Hello, Hero."
+    println(adversary.utterGreeting())
+
+    val friendshipLevel = adversary.determineFriendshipLevel()
+    println(friendshipLevel?.lowercase() ?: "It's complicated.")
+
+    val adversaryHitPoints = adversary.hitPoints
+    println(adversaryHitPoints.dec())
+    println(adversaryHitPoints.javaClass)
+
+    adversary.offerFood()
+}
+
+fun makeProclamation() = "Greetings, beast!"
+
+@JvmOverloads
+fun handOverFood(leftHand: String = "berries", rightHand: String = "beef"){
+    println("Mmmmmmm... you hand over some delicious $leftHand and $rightHand")
+}
+
+class Spellbook {
+    @JvmField
+    val spells = listOf("Magic Ms. L", "Lay on Hans")
+
+    companion object{
+        @JvmField
+        val MAX_SPELL_COUNT = 10
+    }
+}
+
+Jhava.java
+
+ public static void main(String[] args) {
+        System.out.println(Hero.makeProclamation());
+
+        System.out.println("Spells: ");
+        Spellbook spellbook = new Spellbook();
+        for (String spell : spellbook.spells){
+            System.out.println(spell);
+        }
+
+        System.out.println("Max spell count: " + Spellbook.MAX_SPELL_COUNT);
+    }
+
+
+----------------------@JvmStatic----------------------------------
+
+@JvmStatic действует подобно @JvmField, позволяя получить прямой доступ, к функциям,
+объявленным во вспомогательном объекте.
+
+class Spellbook {
+    @JvmField
+    val spells = listOf("Magic Ms. L", "Lay on Hans")
+
+    companion object{
+        @JvmField
+        val MAX_SPELL_COUNT = 10
+
+        @JvmStatic
+        fun getSpellBookGreeting() = println("I am the Great Grimoire!")
+    }
+}
+
+Jhava.java
+
+public static void main(String[] args) {
+        System.out.println(Hero.makeProclamation());
+
+        System.out.println("Spells: ");
+        Spellbook spellbook = new Spellbook();
+        for (String spell : spellbook.spells){
+            System.out.println(spell);
+        }
+
+        System.out.println("Max spell count: " + Spellbook.MAX_SPELL_COUNT);
+
+        Spellbook.getSpellBookGreeting();
+    }

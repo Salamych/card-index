@@ -1,0 +1,26 @@
+Функции-комбинаторы принимают разные коллекции и объединяют их в одну новую.
+
+zip возвращает новый список, коллекцию пар. Для этой коллекции пар вызывается функция toMap,
+чтобы получить ассоциативный массив, к элементам которого можно обращаться по ключу.
+
+val employees = listOf("Denny", "Claudette", "Peter")
+ val shirtSize = listOf("large", "x-large", "medium")
+ val employeeShirtSize = employees.zip(shirtSize).toMap()
+ println(employeeShirtSize)
+{Denny=large, Claudette=x-large, Peter=medium}
+
+
+fold принимает начальное накопленное значение, которое обновляется в соответсвии с результатом
+анонимной функции, вызываемой для каждого элемента в коллекции. Затем накопленное значение
+передается следующей анонимной функции.
+
+val foldedValue = listOf(1,2,3,4).fold(0) {accumulator, number ->
+     println("Accumulated value: $accumulator")
+     accumulator + (number * 3)
+ }
+ println("Final value: $foldedValue")
+Accumulated value: 0
+Accumulated value: 3
+Accumulated value: 9
+Accumulated value: 18
+Final value: 30
